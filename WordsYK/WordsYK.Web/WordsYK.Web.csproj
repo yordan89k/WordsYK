@@ -170,6 +170,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\WordCategoryManagerController.cs" />
+    <Compile Include="Controllers\WordManagerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -238,6 +240,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\WordCategoryManager\" />
+    <Folder Include="Views\WordManager\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -251,6 +255,20 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WordsYK.Core\WordsYK.Core.csproj">
+      <Project>{4ce02115-4878-4772-9d5a-7793c68a7313}</Project>
+      <Name>WordsYK.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WordsYK.DataSQL\WordsYK.DataSQL.csproj">
+      <Project>{9c297ddb-57d0-4269-ae63-48bcb49b7d6a}</Project>
+      <Name>WordsYK.DataSQL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WordsYK.Services\WordsYK.Services.csproj">
+      <Project>{7a5afd5b-c125-4a72-a43d-c343902e8861}</Project>
+      <Name>WordsYK.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
