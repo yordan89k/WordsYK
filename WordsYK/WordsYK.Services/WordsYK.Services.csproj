@@ -43,5 +43,15 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WordsYK.Core\WordsYK.Core.csproj">
+      <Project>{4ce02115-4878-4772-9d5a-7793c68a7313}</Project>
+      <Name>WordsYK.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WordsYK.DataSQL\WordsYK.DataSQL.csproj">
+      <Project>{9c297ddb-57d0-4269-ae63-48bcb49b7d6a}</Project>
+      <Name>WordsYK.DataSQL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

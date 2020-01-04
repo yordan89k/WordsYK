@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4CE02115-4878-4772-9D5A-7793C68A7313}</ProjectGuid>
+    <ProjectGuid>{F1B59A5F-E540-4CDE-82AF-AD17461331D4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WordsYK.Core</RootNamespace>
-    <AssemblyName>WordsYK.Core</AssemblyName>
+    <RootNamespace>DataInMemory</RootNamespace>
+    <AssemblyName>DataInMemory</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -32,7 +32,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Xml.Linq" />
@@ -43,15 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Base.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Models\WordCategory.cs" />
-    <Compile Include="Models\Word.cs" />
+    <Compile Include="WordRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Contracts\" />
-    <Folder Include="ViewModels\" />
+    <ProjectReference Include="..\WordsYK.Core\WordsYK.Core.csproj">
+      <Project>{4CE02115-4878-4772-9D5A-7793C68A7313}</Project>
+      <Name>WordsYK.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
