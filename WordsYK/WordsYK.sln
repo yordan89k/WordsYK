@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordsYK.Web", "WordsYK.Web\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordsYK.Web.Tests", "WordsYK.Web.Tests\WordsYK.Web.Tests.csproj", "{91066EC2-5E56-44EA-86CA-0721B39983F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataInMemory", "DataInMemory\DataInMemory.csproj", "{F1B59A5F-E540-4CDE-82AF-AD17461331D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{91066EC2-5E56-44EA-86CA-0721B39983F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91066EC2-5E56-44EA-86CA-0721B39983F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91066EC2-5E56-44EA-86CA-0721B39983F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1B59A5F-E540-4CDE-82AF-AD17461331D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1B59A5F-E540-4CDE-82AF-AD17461331D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1B59A5F-E540-4CDE-82AF-AD17461331D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1B59A5F-E540-4CDE-82AF-AD17461331D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
