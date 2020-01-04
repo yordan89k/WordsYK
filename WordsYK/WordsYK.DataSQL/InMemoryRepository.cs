@@ -7,7 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MyShopYK.DataAccess.InMemory
-{
+
+{ /*
     public class InMemoryRepository<T> : IRepository<T> where T : Base
     {
         ObjectCache cache = MemoryCache.Default;
@@ -82,5 +83,5 @@ namespace MyShopYK.DataAccess.InMemory
 
 
 
-    }
+    } */
 }

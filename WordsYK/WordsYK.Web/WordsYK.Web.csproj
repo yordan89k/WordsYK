@@ -237,11 +237,13 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\WordManager\Create.cshtml" />
+    <Content Include="Views\WordManager\Edit.cshtml" />
+    <Content Include="Views\WordManager\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\WordCategoryManager\" />
-    <Folder Include="Views\WordManager\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -257,6 +259,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataInMemory\DataInMemory.csproj">
+      <Project>{F1B59A5F-E540-4CDE-82AF-AD17461331D4}</Project>
+      <Name>DataInMemory</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WordsYK.Core\WordsYK.Core.csproj">
       <Project>{4ce02115-4878-4772-9d5a-7793c68a7313}</Project>
       <Name>WordsYK.Core</Name>
