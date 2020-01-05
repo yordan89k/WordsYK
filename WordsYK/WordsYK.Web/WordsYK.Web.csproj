@@ -240,10 +240,12 @@
     <Content Include="Views\WordManager\Create.cshtml" />
     <Content Include="Views\WordManager\Edit.cshtml" />
     <Content Include="Views\WordManager\Delete.cshtml" />
+    <Content Include="Views\WordCategoryManager\Create.cshtml" />
+    <Content Include="Views\WordCategoryManager\Edit.cshtml" />
+    <Content Include="Views\WordCategoryManager\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\WordCategoryManager\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
