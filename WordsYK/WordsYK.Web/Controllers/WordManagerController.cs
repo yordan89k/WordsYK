@@ -6,29 +6,36 @@ using System.Web.Mvc;
 using WordsYK.Core.Models;
 using System.IO;
 using DataInMemory;
+using WordsYK.Core.ViewModels;
 
 namespace WordsYK.WebUI.Controllers
 {
     public class WordManagerController : Controller
     {
-        WordRepository context;
+        WordRepository wordContext;
+        WordCategoryRepository wordCategoriesContext;
 
         public WordManagerController()
         {
-            context = new WordRepository();
+            wordContext = new WordRepository();
+            wordCategoriesContext = new WordCategoryRepository();
+
         }
 
         //Defining the modes here as a start. Could find better practice in future.
         public ActionResult Index()
         {
-            List<Word> words = context.Collection().ToList();
+            List<Word> words = wordContext.Collection().ToList();
             return View(words);
         }
 
         public ActionResult Create()
         {
-            var word = new Word();
-            return View(word);
+            var viewModel = new WordCategoryViewModel();
+            viewModel.Word = new Word();
+            viewModel.WordCategories = wordCategoriesContext.Collection();
+
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -40,8 +47,8 @@ namespace WordsYK.WebUI.Controllers
             }
             else
             {
-                context.Insert(word);
-                context.Commit();
+                wordContext.Insert(word);
+                wordContext.Commit();
 
                 return RedirectToAction("Index");
             }
@@ -49,14 +56,17 @@ namespace WordsYK.WebUI.Controllers
 
         public ActionResult Edit(string Id)
         {
-            Word word = context.Find(Id);
+            Word word = wordContext.Find(Id);
             if (word == null)
             {
                 return HttpNotFound();
             }
             else
             {
-                return View(word);
+                var viewModel = new WordCategoryViewModel();
+                viewModel.Word = word;
+                viewModel.WordCategories = wordCategoriesContext.Collection();
+                return View(viewModel);
             }
 
         }
@@ -64,7 +74,7 @@ namespace WordsYK.WebUI.Controllers
         [HttpPost]
         public ActionResult Edit(Word word, string Id, HttpPostedFileBase file)
         {
-            Word wordToEdit = context.Find(Id);
+            Word wordToEdit = wordContext.Find(Id);
 
             if (wordToEdit == null)
             {
@@ -88,7 +98,7 @@ namespace WordsYK.WebUI.Controllers
                 wordToEdit.Category = word.Category;
                 wordToEdit.Image = word.Image;
 
-                context.Commit();
+                wordContext.Commit();
 
                 return RedirectToAction("Index");
             }
@@ -96,7 +106,7 @@ namespace WordsYK.WebUI.Controllers
 
         public ActionResult Delete(string Id)
         {
-            Word wordToDelete = context.Find(Id);
+            Word wordToDelete = wordContext.Find(Id);
 
             if (wordToDelete == null)
             {
@@ -112,7 +122,7 @@ namespace WordsYK.WebUI.Controllers
         [ActionName("Delete")]
         public ActionResult ConfirmDelete(string Id)
         {
-            Word wordToDelete = context.Find(Id);
+            Word wordToDelete = wordContext.Find(Id);
 
             if (wordToDelete == null)
             {
@@ -120,8 +130,8 @@ namespace WordsYK.WebUI.Controllers
             }
             else
             {
-                context.Delete(Id);
-                context.Commit();
+                wordContext.Delete(Id);
+                wordContext.Commit();
 
                 return RedirectToAction("Index");
             }

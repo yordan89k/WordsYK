@@ -18,7 +18,7 @@ namespace DataInMemory
             wordCategories = cache["wordCategories"] as List<WordCategory>;
             if (wordCategories == null)
             {
-                new List<WordCategory>();
+                wordCategories = new List<WordCategory>();
             }
         }
 
