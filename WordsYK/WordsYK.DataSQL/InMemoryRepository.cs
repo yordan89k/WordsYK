@@ -8,36 +8,37 @@ using System.Threading.Tasks;
 
 namespace MyShopYK.DataAccess.InMemory
 
-{ /*
-    public class InMemoryRepository<T> : IRepository<T> where T : Base
+{
+    public class InMemoryRepository<T> where T : Base
     {
         ObjectCache cache = MemoryCache.Default;
-        List<T> items;
+        List<T> Items;
         string className;
 
         public InMemoryRepository()
         {
             className = typeof(T).Name;
-            items = cache[className] as List<T>;
-            if (items == null)
+            Items = cache[className] as List<T>;
+            if (Items == null)
             {
-                items = new List<T>();
+                Items = new List<T>();
             }
+
         }
 
         public void Commit()
         {
-            cache[className] = items;
+            cache[className] = Items;
         }
 
         public void Insert(T t)
         {
-            items.Add(t);
+            Items.Add(t);
         }
 
         public void Update(T t)
         {
-            T tToUpdate = items.Find(i => i.Id == t.Id);
+            T tToUpdate = Items.Find(i => i.Id == t.Id);
 
             if (tToUpdate != null)
             {
@@ -51,7 +52,7 @@ namespace MyShopYK.DataAccess.InMemory
 
         public T Find(string Id)
         {
-            T t = items.Find(i => i.Id == Id);
+            T t = Items.Find(i => i.Id == Id);
             if (t != null)
             {
                 return t;
@@ -64,16 +65,16 @@ namespace MyShopYK.DataAccess.InMemory
 
         public IQueryable<T> Collection()
         {
-            return items.AsQueryable();
+            return Items.AsQueryable();
         }
 
         public void Delete(string Id)
         {
-            T tToDelete = items.Find(i => i.Id == Id);
+            T tToDelete = Items.Find(i => i.Id == Id);
 
             if (tToDelete != null)
             {
-                items.Remove(tToDelete);
+                Items.Remove(tToDelete);
             }
             else
             {
@@ -81,7 +82,6 @@ namespace MyShopYK.DataAccess.InMemory
             }
         }
 
+    }
 
-
-    } */
 }

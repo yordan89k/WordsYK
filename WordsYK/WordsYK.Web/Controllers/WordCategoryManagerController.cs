@@ -5,115 +5,119 @@ using System.Web;
 using System.Web.Mvc;
 using WordsYK.Core.Models;
 using System.IO;
-using DataInMemory;
+using MyShopYK.DataAccess.InMemory;
 
 namespace WordsYK.WebUI.Controllers
 {
     public class WordCategoryManagerController : Controller
     {
-        WordCategoryRepository context;
-
-        public WordCategoryManagerController()
+        public class ProductCategoryManagerController : Controller
         {
-            context = new WordCategoryRepository();
-        }
+            InMemoryRepository<WordCategory> wordCategoriesContext;
 
-        public ActionResult Index()
-        {
-            List<WordCategory> wordCategories = context.Collection().ToList();
-            return View(wordCategories);
-        }
-
-        public ActionResult Create()
-        {
-            var wordCategory = new WordCategory();
-            return View(wordCategory);
-        }
-
-        [HttpPost]
-        public ActionResult Create(WordCategory wordCategory)
-        {
-            if (!ModelState.IsValid)
+            public ProductCategoryManagerController()
             {
-                return View(wordCategory);
+                wordCategoriesContext = new InMemoryRepository<WordCategory>();
             }
-            else
-            {
-                context.Insert(wordCategory);
-                context.Commit();
 
-                return RedirectToAction("Index");
-            }
-        }
 
-        public ActionResult Edit(string Id)
-        {
-            WordCategory wordCategory = context.Find(Id);
-            if (wordCategory == null)
+            public ActionResult Index()
             {
-                return HttpNotFound();
+                List<WordCategory> wordCategories = wordCategoriesContext.Collection().ToList();
+                return View(wordCategories);
             }
-            else
+
+            public ActionResult Create()
             {
+                var wordCategory = new WordCategory();
                 return View(wordCategory);
             }
 
-        }
-
-        [HttpPost]
-        public ActionResult Edit(WordCategory wordCategory, string Id, HttpPostedFileBase file)
-        {
-            WordCategory wordCategoryToEdit = context.Find(Id);
-
-            if (wordCategoryToEdit == null)
-            {
-                return HttpNotFound();
-            }
-            else
+            [HttpPost]
+            public ActionResult Create(WordCategory wordCategory)
             {
                 if (!ModelState.IsValid)
                 {
                     return View(wordCategory);
                 }
+                else
+                {
+                    wordCategoriesContext.Insert(wordCategory);
+                    wordCategoriesContext.Commit();
 
-                wordCategoryToEdit.Category = wordCategory.Category;
-
-                context.Commit();
-
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
             }
-        }
 
-        public ActionResult Delete(string Id)
-        {
-            WordCategory wordToDelete = context.Find(Id);
-
-            if (wordToDelete == null)
+            public ActionResult Edit(string Id)
             {
-                return HttpNotFound();
+                WordCategory wordCategory = wordCategoriesContext.Find(Id);
+                if (wordCategory == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    return View(wordCategory);
+                }
+
             }
-            else
+
+            [HttpPost]
+            public ActionResult Edit(WordCategory wordCategory, string Id, HttpPostedFileBase file)
             {
-                return View(wordToDelete);
+                WordCategory wordCategoryToEdit = wordCategoriesContext.Find(Id);
+
+                if (wordCategoryToEdit == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    if (!ModelState.IsValid)
+                    {
+                        return View(wordCategory);
+                    }
+
+                    wordCategoryToEdit.Category = wordCategory.Category;
+
+                    wordCategoriesContext.Commit();
+
+                    return RedirectToAction("Index");
+                }
             }
-        }
 
-        [HttpPost]
-        [ActionName("Delete")]
-        public ActionResult ConfirmDelete(string Id)
-        {
-            WordCategory wordCategoryToDelete = context.Find(Id);
-
-            if (wordCategoryToDelete == null)
+            public ActionResult Delete(string Id)
             {
-                return HttpNotFound();
+                WordCategory wordToDelete = wordCategoriesContext.Find(Id);
+
+                if (wordToDelete == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    return View(wordToDelete);
+                }
             }
-            else
-            {
-                context.Delete(Id);
-                context.Commit();
 
-                return RedirectToAction("Index");
+            [HttpPost]
+            [ActionName("Delete")]
+            public ActionResult ConfirmDelete(string Id)
+            {
+                WordCategory wordCategoryToDelete = wordCategoriesContext.Find(Id);
+
+                if (wordCategoryToDelete == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    wordCategoriesContext.Delete(Id);
+                    wordCategoriesContext.Commit();
+
+                    return RedirectToAction("Index");
+                }
             }
         }
     }
