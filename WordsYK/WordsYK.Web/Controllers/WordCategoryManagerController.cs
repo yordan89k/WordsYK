@@ -11,11 +11,9 @@ namespace WordsYK.WebUI.Controllers
 {
     public class WordCategoryManagerController : Controller
     {
-        public class ProductCategoryManagerController : Controller
-        {
             InMemoryRepository<WordCategory> wordCategoriesContext;
 
-            public ProductCategoryManagerController()
+            public WordCategoryManagerController()
             {
                 wordCategoriesContext = new InMemoryRepository<WordCategory>();
             }
@@ -121,4 +119,3 @@ namespace WordsYK.WebUI.Controllers
             }
         }
     }
-}
