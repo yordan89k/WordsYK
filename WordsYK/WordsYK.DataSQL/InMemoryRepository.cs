@@ -5,11 +5,12 @@ using System.Linq;
 using System.Runtime.Caching;
 using System.Text;
 using System.Threading.Tasks;
+using MyShopYK.Core.Contracts;
 
 namespace MyShopYK.DataAccess.InMemory
 
 {
-    public class InMemoryRepository<T> where T : Base
+    public class InMemoryRepository<T> : IRepository<T> where T : Base
     {
         ObjectCache cache = MemoryCache.Default;
         List<T> Items;

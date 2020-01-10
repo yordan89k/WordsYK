@@ -7,23 +7,25 @@ using WordsYK.Core.Models;
 using System.IO;
 using WordsYK.Core.ViewModels;
 using MyShopYK.DataAccess.InMemory;
+using MyShopYK.Core.Contracts;
 
 namespace WordsYK.WebUI.Controllers
 {
     public class WordManagerController : Controller
     {
-            InMemoryRepository<Word> wordContext;
-            InMemoryRepository<WordCategory> wordCategoriesContext;
+        IRepository<Word> wordContext;
+        IRepository<WordCategory> wordCategoriesContext;
 
-            public WordManagerController()
-            {
-                wordContext = new InMemoryRepository<Word>();
-                wordCategoriesContext = new InMemoryRepository<WordCategory>();
-            }
+        public WordManagerController(IRepository<Word> wordContext, IRepository<WordCategory> wordCategoriesContext)
+        {
+            this.wordContext = wordContext;
+            this.wordCategoriesContext = wordCategoriesContext;
+        }
 
 
-            //Defining the modes here as a start. Could find better practice in future.
-            public ActionResult Index()
+
+        //Defining the modes here as a start. Could find better practice in future.
+        public ActionResult Index()
         {
             List<Word> words = wordContext.Collection().ToList();
             return View(words);

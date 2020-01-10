@@ -6,16 +6,17 @@ using System.Web.Mvc;
 using WordsYK.Core.Models;
 using System.IO;
 using MyShopYK.DataAccess.InMemory;
+using MyShopYK.Core.Contracts;
 
 namespace WordsYK.WebUI.Controllers
 {
     public class WordCategoryManagerController : Controller
     {
-            InMemoryRepository<WordCategory> wordCategoriesContext;
+            IRepository<WordCategory> wordCategoriesContext;
 
-            public WordCategoryManagerController()
+            public WordCategoryManagerController(IRepository<WordCategory> wordCategoriesContext)
             {
-                wordCategoriesContext = new InMemoryRepository<WordCategory>();
+            this.wordCategoriesContext = wordCategoriesContext;
             }
 
 
