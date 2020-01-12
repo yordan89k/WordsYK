@@ -99,6 +99,7 @@ namespace WordsYK.WebUI.Controllers
                 {
                     wordToEdit.Image = word.Id + Path.GetExtension(file.FileName);
                     file.SaveAs(Server.MapPath("//Content//WordImages//") + wordToEdit.Image);
+                
                 }
 
                 wordToEdit.EnTranslation = word.EnTranslation;
