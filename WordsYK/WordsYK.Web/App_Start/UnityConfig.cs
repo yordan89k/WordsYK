@@ -4,6 +4,7 @@ using System;
 
 using Unity;
 using WordsYK.Core.Models;
+using WordsYK.DataSQL;
 
 namespace WordsYK.Web
 {
@@ -45,10 +46,8 @@ namespace WordsYK.Web
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
-            container.RegisterType<IRepository<Word>, InMemoryRepository<Word>>();
-            container.RegisterType<IRepository<WordCategory>, InMemoryRepository<WordCategory>>();
-
-
+            container.RegisterType<IRepository<Word>, RepositorySQL<Word>>();
+            container.RegisterType<IRepository<WordCategory>, RepositorySQL<WordCategory>>();
 
         }
     }
