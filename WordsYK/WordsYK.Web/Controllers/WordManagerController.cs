@@ -41,7 +41,7 @@ namespace WordsYK.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Word word)
+        public ActionResult Create(Word word, HttpPostedFileBase file)
         {
             if (!ModelState.IsValid)
             {
@@ -49,6 +49,12 @@ namespace WordsYK.WebUI.Controllers
             }
             else
             {
+                if (file != null)
+                {
+                    word.Image = word.Id + Path.GetExtension(file.FileName);
+                    file.SaveAs(Server.MapPath("//Content//WordImages//") + word.Image);
+                }
+
                 wordContext.Insert(word);
                 wordContext.Commit();
 
@@ -98,7 +104,6 @@ namespace WordsYK.WebUI.Controllers
                 wordToEdit.EnTranslation = word.EnTranslation;
                 wordToEdit.SeTranslation = word.SeTranslation;
                 wordToEdit.Category = word.Category;
-                wordToEdit.Image = word.Image;
 
                 wordContext.Commit();
 
