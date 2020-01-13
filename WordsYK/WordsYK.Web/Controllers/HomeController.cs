@@ -34,52 +34,48 @@ namespace WordsYK.Web.Controllers
         }
 
 
+        /* OLD INDEX !!
+         public ActionResult Index(List<String> CategoriesToInclude = null, int WordsNumber=10)
+         {
+             List<Word> wordsToInclude;
+             List<WordCategory> allWordCategories;
+
+             wordsToInclude = null;
+             allWordCategories = wordCategoriesContext.Collection().ToList();
+
+             var NumberOfWordsInput = WordsNumber;
+             // So far just declaring an int variable NumberOfWordsInput to late use in the model.
+
+             if (CategoriesToInclude == null)
+             {
+                 wordsToInclude = wordContext.Collection().ToList();
+             }
+             else
+             {
+                 foreach (var category in CategoriesToInclude)
+                 {
+                     wordsToInclude = wordContext.Collection().Where(w => w.Category == category).ToList();
+                 }
+             }
+             // Created a list with categories to include. Can work with it later.
 
 
 
 
-       /* OLD INDEX !!
-        public ActionResult Index(List<String> CategoriesToInclude = null, int WordsNumber=10)
-        {
-            List<Word> wordsToInclude;
-            List<WordCategory> allWordCategories;
-
-            wordsToInclude = null;
-            allWordCategories = wordCategoriesContext.Collection().ToList();
-
-            var NumberOfWordsInput = WordsNumber;
-            // So far just declaring an int variable NumberOfWordsInput to late use in the model.
-
-            if (CategoriesToInclude == null)
-            {
-                wordsToInclude = wordContext.Collection().ToList();
-            }
-            else
-            {
-                foreach (var category in CategoriesToInclude)
-                {
-                    wordsToInclude = wordContext.Collection().Where(w => w.Category == category).ToList();
-                }
-            }
-            // Created a list with categories to include. Can work with it later.
+             //wordsToInclude = wordContext.Collection().Where(w => w.Category == category).ToList();
 
 
-            
+             var model = new ModeViewModel();
+             model.WordCategories = allWordCategories;
+             model.NumberOfWords = WordsNumber;
+             model.Words = wordsToInclude;
+             // Some of the logic here should be in another controller. Here we need to show all Categories and number of words.
+             // Then in another controller we need to create list/collection of X? random words from X? categories (as a start)  
 
-            //wordsToInclude = wordContext.Collection().Where(w => w.Category == category).ToList();
+             return View(model);
+         }
 
-
-            var model = new ModeViewModel();
-            model.WordCategories = allWordCategories;
-            model.NumberOfWords = WordsNumber;
-            model.Words = wordsToInclude;
-            // Some of the logic here should be in another controller. Here we need to show all Categories and number of words.
-            // Then in another controller we need to create list/collection of X? random words from X? categories (as a start)  
-
-            return View(model);
-        }
-
-    */
+     */
 
         public ActionResult About()
         {
