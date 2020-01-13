@@ -11,6 +11,8 @@ namespace WordsYK.Core.ViewModels
     {
         public int NumberOfWords { get; set; }
 
-        public IEnumerable<WordCategory> WordCategoryTypes { get; set; }
+        public IEnumerable<Word> Words { get; set; }
+
+        public IEnumerable<WordCategory> WordCategories { get; set; }
     }
 }
