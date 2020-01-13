@@ -9,7 +9,9 @@ namespace WordsYK.Core.Models
     public class Mode : Base
     {
         public string Name { get; set; }
-        public int Value { get; set; }
+        public int NumberOfWords { get; set; }
+        public List<WordCategory> WordCategoryTypes { get; set; }
+        //Not sure if the variable can be list here. Will try.
     }
-    //Example Comment
+
 }
