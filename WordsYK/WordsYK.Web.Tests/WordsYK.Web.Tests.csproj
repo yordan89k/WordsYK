@@ -99,6 +99,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WordsYK.Core\WordsYK.Core.csproj">
+      <Project>{4CE02115-4878-4772-9D5A-7793C68A7313}</Project>
+      <Name>WordsYK.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WordsYK.Web\WordsYK.Web.csproj">
       <Project>{F6E1B4FF-3D67-463A-B116-6C764415F49B}</Project>
       <Name>WordsYK.Web</Name>

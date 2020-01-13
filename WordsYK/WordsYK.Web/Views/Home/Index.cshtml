@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WordsYK.Core.ViewModels.ModeViewModel>
+﻿@model WordsYK.Core.ViewModels.HomePageViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -6,9 +6,11 @@
 
 <h1>WordsYK</h1>
 
-@foreach (var item in Model)
+@foreach (var item in Model.WordCategories)
 {
-
+<div class="list-group">
+    @item.Category
+</div>
 }
 @*To Create the view. Need to show all categories + ability to select them and filed with input for the number of words.
   Lastly a button to apply those changes and start the excercise (on new page) *@

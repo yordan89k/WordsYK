@@ -14,6 +14,31 @@ namespace WordsYK.Web.Controllers
         IRepository<Word> wordContext;
         IRepository<WordCategory> wordCategoriesContext;
 
+        public HomeController(IRepository<Word> wordContext, IRepository<WordCategory> wordCategoriesContext)
+        {
+            this.wordContext = wordContext;
+            this.wordCategoriesContext = wordCategoriesContext;
+        }
+
+
+        public ActionResult Index()
+        {
+            List<WordCategory> allWordCategories;
+            allWordCategories = wordCategoriesContext.Collection().ToList();
+
+            var model = new HomePageViewModel();
+            model.WordCategories = allWordCategories;
+            model.NumberOfWords = 10;
+
+            return View(model);
+        }
+
+
+
+
+
+
+       /* OLD INDEX !!
         public ActionResult Index(List<String> CategoriesToInclude = null, int WordsNumber=10)
         {
             List<Word> wordsToInclude;
@@ -44,21 +69,17 @@ namespace WordsYK.Web.Controllers
             //wordsToInclude = wordContext.Collection().Where(w => w.Category == category).ToList();
 
 
-
-
-
-
             var model = new ModeViewModel();
             model.WordCategories = allWordCategories;
             model.NumberOfWords = WordsNumber;
             model.Words = wordsToInclude;
-            // To give the option to enter number of words later. Right now we use Default value of 10.
-
-
-
+            // Some of the logic here should be in another controller. Here we need to show all Categories and number of words.
+            // Then in another controller we need to create list/collection of X? random words from X? categories (as a start)  
 
             return View(model);
         }
+
+    */
 
         public ActionResult About()
         {
