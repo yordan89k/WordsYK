@@ -33,6 +33,18 @@ namespace WordsYK.Web.Controllers
             return View(model);
         }
 
+        public ActionResult SetMode()
+        {
+            var mode = new Mode();
+            var i = 10;
+            i = System.Convert.ToInt32(Request.Form["words1"]); 
+            mode.NumberOfWords = i;
+
+            var i2 = "i2";
+            i2 = (Request.Form["categories1"]);
+            return View(mode);
+        }
+
 
         /* OLD INDEX !!
          public ActionResult Index(List<String> CategoriesToInclude = null, int WordsNumber=10)

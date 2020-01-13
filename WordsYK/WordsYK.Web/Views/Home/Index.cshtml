@@ -6,6 +6,38 @@
 
 <h1>WordsYK</h1>
 
+<div class="col-md-12">
+    <form action="SetMode" method="post">
+        Words number <input type="text" id="words1" name="words1" /><br />
+        @foreach (var cat in Model.WordCategories)
+        {
+            <div>
+                <input type="checkbox" id="categories1" name="categories1" value="@cat.Category">
+                <label>
+                    @cat.Category
+                </label>
+            </div>
+        }
+        <input id="Submit" name="Submit" type="submit" value="Start">
+    </form>
+</div>
+
+@* WORKING
+    <div class="col-md-12">
+        <form action="SetMode" method="post">
+            Words number <input type="text" id="words1" name="words1" /><br />
+            <select id="categories1" name="categories1" size="5" multiple>
+                @foreach (var cat in Model.WordCategories)
+                {
+                    <option>@cat.Category</option>
+                }
+            </select>
+            <input id="Submit" name="Submit" type="submit" value="Start">
+        </form>
+    </div>
+*@
+
+
 <div class="col-md-6">
     <h4>Filter by Category</h4>
     <div class="list-group">
