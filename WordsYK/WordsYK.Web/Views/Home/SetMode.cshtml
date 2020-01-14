@@ -34,11 +34,14 @@
             @Html.DisplayFor(model => model.NumberOfWords)
         </dd>
 
+        @foreach (var word in Model.WordsToInclude)
+        {
+            @Html.DisplayFor(modelItem => word.EnTranslation)
+        }
+
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
-
-<p>@Request.Form["categories1"]</p>

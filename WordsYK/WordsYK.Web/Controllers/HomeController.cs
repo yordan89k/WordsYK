@@ -33,15 +33,31 @@ namespace WordsYK.Web.Controllers
             return View(model);
         }
 
-        public ActionResult SetMode()
+        public ActionResult SetMode(List<String> CategoriesToInclude = null, int WordsNumber = 10)
         {
-            var mode = new Mode();
-            var i = 10;
-            i = System.Convert.ToInt32(Request.Form["words1"]); 
-            mode.NumberOfWords = i;
 
-            var i2 = "i2";
-            i2 = (Request.Form["categories1"]);
+            var mode = new Mode();
+
+
+            WordsNumber = System.Convert.ToInt32(Request.Form["words1"]); 
+            mode.NumberOfWords = WordsNumber;
+
+
+            CategoriesToInclude = Request.Form["categories1"].Split(',').ToList();
+            mode.WordCategoryTypes = CategoriesToInclude;
+
+            if (CategoriesToInclude == null)
+            {
+                mode.WordsToInclude = wordContext.Collection().ToList();
+            }
+            else
+            {
+                foreach (var category in CategoriesToInclude)
+                {
+                    mode.WordsToInclude = wordContext.Collection().Where(w => w.Category == category).ToList();
+                }
+            }
+
             return View(mode);
         }
 

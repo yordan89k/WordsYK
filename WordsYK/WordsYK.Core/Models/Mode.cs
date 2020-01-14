@@ -10,8 +10,10 @@ namespace WordsYK.Core.Models
     {
         public string Name { get; set; }
         public int NumberOfWords { get; set; }
-        public List<WordCategory> WordCategoryTypes { get; set; }
+        public List<string> WordCategoryTypes { get; set; }
         //Not sure if the variable can be list here. Will try.
+
+        public List<Word> WordsToInclude { get; set; }
     }
 
 }
