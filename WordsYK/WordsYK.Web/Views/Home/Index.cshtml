@@ -7,34 +7,42 @@
 <h1>WordsYK</h1>
 
 <div class="col-md-12">
-    <form action="SetMode" method="post">
-        Words number <input type="text" id="words1" name="words1" /><br />
-        @foreach (var cat in Model.WordCategories)
-        {
-            <div>
-                <input type="checkbox" id="categories1" name="categories1" value="@cat.Category">
-                <label>
-                    @cat.Category
-                </label>
-            </div>
-        }
-        <input id="Submit" name="Submit" type="submit" value="Start">
+
+</div>
+
+<div class="col-md-12">
+    <form action="Home/WordSession" method="post">
+        <div class="form-group col-md-12">
+            Words: <input type="number" id="wordsnumberinput" name="wordsnumberinput" /><br />
+        </div>
+
+
+        <div class="col-md-12">
+            <br />Categories:<br />
+            <input type="checkbox" onClick="toggle(this)" /><b> Select all</b><br />
+            @foreach (var cat in Model.WordCategories)
+            {
+                <div>
+                    <input type="checkbox" id="categoriesinput" name="categoriesinput" value="@cat.Category">
+                    <label>
+                        @cat.Category
+                    </label>
+                </div>
+            }
+            <input id="Submit" name="Submit" type="submit" value="Start">
+        </div>
     </form>
 </div>
 
-@* WORKING
-    <div class="col-md-12">
-        <form action="SetMode" method="post">
-            Words number <input type="text" id="words1" name="words1" /><br />
-            <select id="categories1" name="categories1" size="5" multiple>
-                @foreach (var cat in Model.WordCategories)
-                {
-                    <option>@cat.Category</option>
-                }
-            </select>
-            <input id="Submit" name="Submit" type="submit" value="Start">
-        </form>
-    </div>
-*@
+
+@*To move this SJ code in a file*@
+<script language="JavaScript">
+    function toggle(source) {
+        checkboxes = document.getElementsByName('categoriesinput');
+        for (var i = 0, n = checkboxes.length; i < n; i++) {
+            checkboxes[i].checked = source.checked;
+        }
+    }
+</script>
 
 <div class="col-md-12 clearfix" />

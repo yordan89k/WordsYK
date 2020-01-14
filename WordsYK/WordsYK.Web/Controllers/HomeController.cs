@@ -33,17 +33,18 @@ namespace WordsYK.Web.Controllers
             return View(model);
         }
 
-        public ActionResult SetMode(List<String> CategoriesToInclude = null, int WordsNumber = 10)
+        public ActionResult WordSession(List<String> CategoriesToInclude = null, int WordsNumber = 10)
         {
 
             var mode = new Mode();
 
 
-            WordsNumber = System.Convert.ToInt32(Request.Form["words1"]); 
+            WordsNumber = System.Convert.ToInt32(Request.Form["wordsnumberinput"]); 
             mode.NumberOfWords = WordsNumber;
 
 
-            CategoriesToInclude = Request.Form["categories1"].Split(',').ToList();
+            CategoriesToInclude = Request.Form["categoriesinput"].Split(',').ToList();
+            // To do some defensive programming here. Can't split if input is Null.
             mode.WordCategoryTypes = CategoriesToInclude;
 
             if (CategoriesToInclude == null)
@@ -57,6 +58,10 @@ namespace WordsYK.Web.Controllers
                     mode.WordsToInclude = wordContext.Collection().Where(w => w.Category == category).ToList();
                 }
             }
+
+            mode.Name = string.Format("Exercising {0} words of type '{1}'", mode.NumberOfWords, Request.Form["categoriesinput"]);
+
+            //To Do next: build a list of random words based on what we have.
 
             return View(mode);
         }

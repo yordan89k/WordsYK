@@ -265,7 +265,7 @@
     <Content Include="Views\WordCategoryManager\Delete.cshtml" />
     <Content Include="Views\WordManager\Index.cshtml" />
     <Content Include="Views\WordCategoryManager\Index.cshtml" />
-    <Content Include="Views\Home\SetMode.cshtml" />
+    <Content Include="Views\Home\WordSession.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
