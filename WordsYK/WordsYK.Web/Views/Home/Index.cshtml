@@ -17,9 +17,9 @@
         </div>
 
 
-        <div class="col-md-12">
+        <div class="col-md-12" @*can add a class here to style the whole form*@ >
             <br />Categories:<br />
-            <input type="checkbox" onClick="toggle(this)" /><b> Select all</b><br />
+            <input type="checkbox" onClick="toggle(this)" /> Select all<br />
             @foreach (var cat in Model.WordCategories)
             {
                 <div>

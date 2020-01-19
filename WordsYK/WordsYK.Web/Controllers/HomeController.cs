@@ -33,10 +33,12 @@ namespace WordsYK.Web.Controllers
             return View(model);
         }
 
+        //Need to move this to SessionController, edit the view also
         public ActionResult WordSession(List<String> CategoriesToInclude = null, int WordsNumber = 10)
         {
 
             var mode = new Mode();
+            var WordsTemp = new List<Word>();
 
 
             WordsNumber = System.Convert.ToInt32(Request.Form["wordsnumberinput"]); 
@@ -44,9 +46,11 @@ namespace WordsYK.Web.Controllers
 
 
             CategoriesToInclude = Request.Form["categoriesinput"].Split(',').ToList();
-            // To do some defensive programming here. Can't split if input is Null.
+            // -! To do some defensive programming here. Can't split if input is Null.
             mode.WordCategoryTypes = CategoriesToInclude;
+            mode.WordsToInclude = new List<Word>();
 
+            // -! Not the clear code. To optimize it later since it has 2 ifs and 2 foreach in each other
             if (CategoriesToInclude == null)
             {
                 mode.WordsToInclude = wordContext.Collection().ToList();
@@ -55,7 +59,15 @@ namespace WordsYK.Web.Controllers
             {
                 foreach (var category in CategoriesToInclude)
                 {
-                    mode.WordsToInclude = wordContext.Collection().Where(w => w.Category == category).ToList();
+                    WordsTemp = wordContext.Collection().Where(w => w.Category == category).ToList();
+                    if (WordsTemp != null)
+                    {
+                        
+                        foreach (var word in WordsTemp)
+                        {
+                            mode.WordsToInclude.Add(word);
+                        }
+                    }
                 }
             }
 
@@ -112,7 +124,7 @@ namespace WordsYK.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Believe it or not, this is a description page.";
 
             return View();
         }
