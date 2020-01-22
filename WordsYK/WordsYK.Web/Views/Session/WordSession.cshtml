@@ -4,15 +4,15 @@
     ViewBag.Title = @Html.DisplayNameFor(model => model.Name);
 }
 
-    <h3>@Html.DisplayFor(model => model.Name)</h3>
+<h3>@Html.DisplayFor(model => model.Name)</h3>
 
-@*To do as View:  1. Show word with Index[X] from the List at WordSession. 
+@*To do as View:  1. Show word with Index[X] from the List at WordSession.
     2. On click NEXT check with new controller if Input=SeTranslation. If so - show Index[X+1] if not - return Index[X] with message *@
 
 <div class="list-group-item">
 
-        @foreach (var word in Model.WordsToInclude)
-        {
-            @Html.DisplayFor(modelItem => word.EnTranslation)
-        }
+    @foreach (var word in Model.WordsToInclude)
+    {
+        @Html.DisplayFor(modelItem => word.EnTranslation)
+    }
 </div>
