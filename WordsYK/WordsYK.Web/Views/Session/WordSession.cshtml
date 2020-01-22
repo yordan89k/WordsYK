@@ -9,10 +9,38 @@
 @*To do as View:  1. Show word with Index[X] from the List at WordSession.
     2. On click NEXT check with new controller if Input=SeTranslation. If so - show Index[X+1] if not - return Index[X] with message *@
 
-<div class="list-group-item">
 
-    @foreach (var word in Model.WordsToInclude)
+
+
+<div class="col-md-12">
+    @for (int i = 0; i < Model.NumberOfWords; i++)
     {
-        @Html.DisplayFor(modelItem => word.EnTranslation)
+        @Html.DisplayFor(model => model.WordsToInclude[i].EnTranslation);
+        <br>
+        <form>
+           <input type="text" name="answer" oninvalid="this.setCustomValidity('Wrong answer.')" oninput="this.setCustomValidity('')" >
+        </form>
+
+        <br>
+        if (@Model.WordsToInclude[i].Image != null)
+        {
+            <img class="img-thumbnail" style="height:100px" src="~/Content/WordImages/@Model.WordsToInclude[i].Image">
+        }
+        <br>
+
+
     }
 </div>
+
+<div class="col-md-12 clearfix" />
+
+
+@* 
+<div class="list-group-item">
+    <p>(TESTING) Displaying all items in the list:</p>
+    @foreach (var word in Model.WordsToInclude)
+    {
+        @Html.DisplayFor(modelItem => word.EnTranslation);
+    }
+</div>    
+*@

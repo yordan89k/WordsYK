@@ -31,8 +31,8 @@ namespace WordsYK.Web.Controllers
         {
 
             var mode = new Mode();
-            var WordsTemp = new List<Word>();
-
+            var WordsTemp = new List<Word>(); 
+            var rnd = new Random();
 
             WordsNumber = System.Convert.ToInt32(Request.Form["wordsnumberinput"]);
             mode.NumberOfWords = WordsNumber;
@@ -65,11 +65,25 @@ namespace WordsYK.Web.Controllers
             }
 
             mode.Name = string.Format("Session of {0} words of type {1}", mode.NumberOfWords, Request.Form["categoriesinput"]);
+            // Now we have the categories in a list and the words in a list
 
-            //To Do next: build a list of random words based on what we have.
+
+
+        
+            int n = mode.WordsToInclude.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rnd.Next(n + 1);
+                Word value = mode.WordsToInclude[k];
+                mode.WordsToInclude[k] = mode.WordsToInclude[n];
+                mode.WordsToInclude[n] = value;
+            }
+            //Now the words in the list are in random order
+
 
             return View(mode);
-        }
 
+        }     
     }
 }
