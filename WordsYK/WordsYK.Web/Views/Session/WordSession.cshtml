@@ -6,41 +6,51 @@
 
 <h3>@Html.DisplayFor(model => model.Name)</h3>
 
-@*To do as View:  1. Show word with Index[X] from the List at WordSession.
-    2. On click NEXT check with new controller if Input=SeTranslation. If so - show Index[X+1] if not - return Index[X] with message *@
-
-
 
 
 <div class="col-md-12">
     @for (int i = 0; i < Model.NumberOfWords; i++)
     {
-        @Html.DisplayFor(model => model.WordsToInclude[i].EnTranslation);
-        <br>
-        <form>
-           <input type="text" name="answer" oninvalid="this.setCustomValidity('Wrong answer.')" oninput="this.setCustomValidity('')" >
-        </form>
+    <div class="col-md-3" style="height:360px; padding:10px; margin:10px; border: solid thin grey">
+        <div class="col-md-12 text-uppercase text-primary">
+            @Html.DisplayFor(model => model.WordsToInclude[i].EnTranslation)
+        </div>
 
-        <br>
-        if (@Model.WordsToInclude[i].Image != null)
-        {
-            <img class="img-thumbnail" style="height:100px" src="~/Content/WordImages/@Model.WordsToInclude[i].Image">
+        <div class="col-md-12" style="padding:3px; margin:3px;">
+            <label for="answer">Translate to Swedish: </label>
+            <input id="answer" required pattern="@Model.WordsToInclude[i].SeTranslation| @Model.WordsToInclude[i].SeTranslation">
+        </div>
+
+        <div class="col-md-12" style="padding:3px; margin:3px;">
+            <img class="img-thumbnail" style="height:200px" src="~/Content/WordImages/@Model.WordsToInclude[i].Image">
+        </div>
+
+        <div class="col-md-12" style="padding:3px; margin:3px;">
+            <button id="@i" class="btn-primary">See right answer</button>
+        </div>
+
+            <script>
+            document.getElementById("@i").addEventListener("click", myFunction);
+
+            function myFunction() {
+                document.getElementById("@i").innerHTML = "@Model.WordsToInclude[i].SeTranslation";
+            }
+            </script>
+        </div>
         }
-        <br>
 
 
-    }
-</div>
+    </div>
 
 <div class="col-md-12 clearfix" />
 
 
-@* 
-<div class="list-group-item">
-    <p>(TESTING) Displaying all items in the list:</p>
-    @foreach (var word in Model.WordsToInclude)
-    {
-        @Html.DisplayFor(modelItem => word.EnTranslation);
-    }
-</div>    
+@*
+    <div class="list-group-item">
+        <p>(TESTING) Displaying all items in the list:</p>
+        @foreach (var word in Model.WordsToInclude)
+        {
+            @Html.DisplayFor(modelItem => word.EnTranslation);
+        }
+    </div>
 *@
