@@ -1,33 +1,33 @@
-﻿@model WordsYK.Core.Models.Mode
+﻿@using WordsYK.Core.Models;
 
-@{
-    ViewBag.Title = @Html.DisplayNameFor(model => model.Name);
-}
-
-<h3>@Html.DisplayFor(model => model.Name)</h3>
+@model Mode
 
 
+<h3>@Model.Name</h3>
 
-<div class="col-md-12">
-    @for (int i = 0; i < Model.NumberOfWords; i++)
-    {
-    <div class="col-md-3" style="height:360px; padding:10px; margin:10px; border: solid thin grey">
-        <div class="col-md-12 text-uppercase text-primary">
-            @Html.DisplayFor(model => model.WordsToInclude[i].EnTranslation)
-        </div>
+@if (Model.WordsToInclude != null && Model.WordsToInclude.Any() && Model.NumberOfWords > 0)
+{
+    <div class="col-md-12 session-page">
 
-        <div class="col-md-12" style="padding:3px; margin:3px;">
-            <label for="answer">Translate to Swedish: </label>
-            <input id="answer" required pattern="@Model.WordsToInclude[i].SeTranslation| @Model.WordsToInclude[i].SeTranslation">
-        </div>
+        @for (int i = 0; i < Model.NumberOfWords; i++)
+        {
+        <div class="col-md-3 word-box">
+            <div class="col-md-12 text-uppercase text-primary">
+                @Html.DisplayFor(model => model.WordsToInclude[i].EnTranslation)
+            </div>
 
-        <div class="col-md-12" style="padding:3px; margin:3px;">
-            <img class="img-thumbnail" style="height:200px" src="~/Content/WordImages/@Model.WordsToInclude[i].Image">
-        </div>
+            <div class="col-md-12" style="padding:3px; margin:3px;">
+                <label for="answer">Translate to Swedish: </label>
+                <input id="answer" required pattern="@Model.WordsToInclude[i].SeTranslation| @Model.WordsToInclude[i].SeTranslation">
+            </div>
 
-        <div class="col-md-12" style="padding:3px; margin:3px;">
-            <button id="@i" class="btn-primary">See right answer</button>
-        </div>
+            <div class="col-md-12" style="padding:3px; margin:3px;">
+                <img class="img-thumbnail" style="height:200px" src="~/Content/WordImages/@Model.WordsToInclude[i].Image">
+            </div>
+
+            <div class="col-md-12" style="padding:3px; margin:3px;">
+                <button id="@i" class="btn-primary">See right answer</button>
+            </div>
 
             <script>
             document.getElementById("@i").addEventListener("click", myFunction);
@@ -38,19 +38,11 @@
             </script>
         </div>
         }
-
-
     </div>
 
-<div class="col-md-12 clearfix" />
-
-
-@*
-    <div class="list-group-item">
-        <p>(TESTING) Displaying all items in the list:</p>
-        @foreach (var word in Model.WordsToInclude)
-        {
-            @Html.DisplayFor(modelItem => word.EnTranslation);
-        }
-    </div>
-*@
+    <div class="col-md-12 clearfix" />
+}
+else
+{
+ <p> TODO: return to start page instead </p>
+}

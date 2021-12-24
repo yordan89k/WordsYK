@@ -10,8 +10,6 @@ namespace WordsYK.Web.Controllers
 {
     public class SessionController : Controller
     {
-        // GET: Session
-
         IRepository<Word> wordContext;
         IRepository<WordCategory> wordCategoriesContext;
 
@@ -21,69 +19,61 @@ namespace WordsYK.Web.Controllers
             this.wordCategoriesContext = wordCategoriesContext;
         }
 
-
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult WordSession(List<String> CategoriesToInclude = null, int WordsNumber = 10)
+        public ActionResult WordSession()
         {
-
             var mode = new Mode();
-            var WordsTemp = new List<Word>(); 
-            var rnd = new Random();
+            var wordsNumber = !string.IsNullOrEmpty(Request.Form["wordsnumberinput"]) ? Convert.ToInt32(Request.Form["wordsnumberinput"]) : 10;
+            var categoriesToInclude = Request.Form["categoriesinput"] != null ? Request.Form["categoriesinput"].Split(',').ToList() : new List<string>() { };
 
-            WordsNumber = System.Convert.ToInt32(Request.Form["wordsnumberinput"]);
-            mode.NumberOfWords = WordsNumber;
+            mode.NumberOfWords = wordsNumber;
+            mode.WordCategoryTypes = categoriesToInclude;
+            mode.WordsToInclude = RandomizeItemOrderInList(BuildWordsToIncludeList(categoriesToInclude));
+            mode.Name = "Session of " + mode.NumberOfWords.ToString() + (mode.NumberOfWords > 1 ? " words " : " word ") 
+                +  "of type " + Request.Form["categoriesinput"];
 
+            return View(mode);
+        }
 
-            CategoriesToInclude = Request.Form["categoriesinput"].Split(',').ToList();
-            // -! To do some defensive programming here. Can't split if input is Null.
-            mode.WordCategoryTypes = CategoriesToInclude;
-            mode.WordsToInclude = new List<Word>();
+        private List<Word> BuildWordsToIncludeList(List<string> categoriesToInclude)
+        {
+            var result = new List<Word>();
+            if (categoriesToInclude == null || !categoriesToInclude.Any())
+                return result;
 
-            // -! Not the clear code. To optimize it later since it has 2 ifs and 2 foreach in each other
-            if (CategoriesToInclude == null)
+            foreach (var category in categoriesToInclude)
             {
-                mode.WordsToInclude = wordContext.Collection().ToList();
-            }
-            else
-            {
-                foreach (var category in CategoriesToInclude)
+                var WordsTemp = wordContext.Collection().Where(w => w.Category == category).ToList();
+                if (WordsTemp != null)
                 {
-                    WordsTemp = wordContext.Collection().Where(w => w.Category == category).ToList();
-                    if (WordsTemp != null)
+                    foreach (var word in WordsTemp)
                     {
-
-                        foreach (var word in WordsTemp)
-                        {
-                            mode.WordsToInclude.Add(word);
-                        }
+                        result.Add(word);
                     }
                 }
             }
+            return result;
+        }
 
-            mode.Name = string.Format("Session of {0} words of type {1}", mode.NumberOfWords, Request.Form["categoriesinput"]);
-            // Now we have the categories in a list and the words in a list
+        private List<Word> RandomizeItemOrderInList(List<Word> listToBeRandomized)
+        {
+            if (listToBeRandomized == null || listToBeRandomized.Count <= 1)
+                return listToBeRandomized;
 
-
-
-        
-            int n = mode.WordsToInclude.Count;
+            var n = listToBeRandomized.Count;
             while (n > 1)
             {
                 n--;
-                int k = rnd.Next(n + 1);
-                Word value = mode.WordsToInclude[k];
-                mode.WordsToInclude[k] = mode.WordsToInclude[n];
-                mode.WordsToInclude[n] = value;
+                int k = new Random().Next(n + 1);
+                Word value = listToBeRandomized[k];
+                listToBeRandomized[k] = listToBeRandomized[n];
+                listToBeRandomized[n] = value;
             }
-            //Now the words in the list are in random order
-
-
-            return View(mode);
-
-        }     
+            return listToBeRandomized;
+        }
     }
 }

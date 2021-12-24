@@ -24,7 +24,10 @@ namespace WordsYK.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      // YK: Include custome styles here
+                      "~/Styles/session.css"
+                      ));
         }
     }
 }

@@ -1,0 +1,10 @@
+﻿.session-page {
+}
+
+/*TODO: file is loaded but the word-box class is not applied */
+.word-box {
+    height: 360px;
+    padding: 100px;
+    margin: 100px;
+    border: solid thin grey
+}
