@@ -26,7 +26,7 @@ namespace WordsYK.Web
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       // YK: Include custome styles here
-                      "~/Styles/session.css"
+                      "~/Styles/wordsession.css"
                       ));
         }
     }

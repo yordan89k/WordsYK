@@ -11,38 +11,50 @@
 
         @for (int i = 0; i < Model.NumberOfWords; i++)
         {
-        <div class="col-md-3 word-box">
-            <div class="col-md-12 text-uppercase text-primary">
-                @Html.DisplayFor(model => model.WordsToInclude[i].EnTranslation)
+            <div class="col-md-3 word-box">
+                <div class="col-md-12 text-uppercase text-primary">
+                    @Html.DisplayFor(model => model.WordsToInclude[i].EnTranslation)
+                </div>
+
+                <div class="col-md-12 translate-input">
+                    <label for="@("answer" + i)">Translate to Swedish: </label>
+                    <input id="@("answer" + i)" required pattern="@Model.WordsToInclude[i].SeTranslation">
+                </div>
+
+                <div class="col-md-12" style="padding:3px; margin:3px;">
+                    <img class="img-thumbnail" style="height:200px" src="~/Content/WordImages/@Model.WordsToInclude[i].Image">
+                </div>
+
+                <div class="col-md-12" style="padding:3px; margin:3px;">
+                    <button id="@("see-translation-btn" + i)" class="btn-primary">See right answer</button>
+                </div>
             </div>
 
-            <div class="col-md-12" style="padding:3px; margin:3px;">
-                <label for="answer">Translate to Swedish: </label>
-                <input id="answer" required pattern="@Model.WordsToInclude[i].SeTranslation| @Model.WordsToInclude[i].SeTranslation">
-            </div>
+            // SCRIPTS SECTION START
+    <script>
+        var seeTranslationButton = document.getElementById("@("see-translation-btn" + i)");
+        seeTranslationButton.addEventListener("click", translateToSe);
 
-            <div class="col-md-12" style="padding:3px; margin:3px;">
-                <img class="img-thumbnail" style="height:200px" src="~/Content/WordImages/@Model.WordsToInclude[i].Image">
-            </div>
-
-            <div class="col-md-12" style="padding:3px; margin:3px;">
-                <button id="@i" class="btn-primary">See right answer</button>
-            </div>
-
-            <script>
-            document.getElementById("@i").addEventListener("click", myFunction);
-
-            function myFunction() {
-                document.getElementById("@i").innerHTML = "@Model.WordsToInclude[i].SeTranslation";
-            }
-            </script>
-        </div>
+            function translateToSe() {
+                seeTranslationButton.innerHTML = "@Model.WordsToInclude[i].SeTranslation";
         }
-    </div>
+                var answerInput = document.getElementById("answer" + @i);
+        var correctAnswer = "@Model.WordsToInclude[i].SeTranslation";
 
-    <div class="col-md-12 clearfix" />
+        console.log("answerInput in View: " + answerInput);
+        console.log("correctAnswer: " + correctAnswer);
+
+
+    </script>
+            // END OF SCRIPTS SECTION
+
+
+        }
+        <div class="col-md-12 clearfix" />
+    </div>
 }
 else
 {
- <p> TODO: return to start page instead </p>
+    <p> TODO: return to start page instead </p>
 }
+@Scripts.Render("~/Scripts/MyScripts/wordsession.js")
