@@ -15,3 +15,11 @@
 .translate-input > label{
     margin-right: 0.75rem;
 }
+
+.invalid {
+    background-color: #FFC5C5;
+}
+
+.valid {
+    background-color: #D0FFC5;
+}

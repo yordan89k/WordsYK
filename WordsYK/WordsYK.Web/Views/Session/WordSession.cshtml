@@ -7,7 +7,11 @@
 
 @if (Model.WordsToInclude != null && Model.WordsToInclude.Any() && Model.NumberOfWords > 0)
 {
+
     <div class="col-md-12 session-page">
+        <div>
+            <p id="result">Result</p>
+        </div>
 
         @for (int i = 0; i < Model.NumberOfWords; i++)
         {
@@ -31,7 +35,7 @@
             </div>
 
             // SCRIPTS SECTION START
-    <script>
+            <script>
         var seeTranslationButton = document.getElementById("@("see-translation-btn" + i)");
         seeTranslationButton.addEventListener("click", translateToSe);
 
@@ -44,14 +48,13 @@
         console.log("answerInput in View: " + answerInput);
         console.log("correctAnswer: " + correctAnswer);
 
-
-    </script>
+            </script>
             // END OF SCRIPTS SECTION
 
-
         }
-        <div class="col-md-12 clearfix" />
     </div>
+    <div class="col-md-12 clearfix" />
+
 }
 else
 {
