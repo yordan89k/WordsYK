@@ -22,7 +22,7 @@
 
                 <div class="col-md-12 translate-input">
                     <label for="@("answer" + i)">Translate to Swedish: </label>
-                    <input id="@("answer" + i)" required pattern="@Model.WordsToInclude[i].SeTranslation">
+                    <input id="@("answer" + i)" data-answer="@Model.WordsToInclude[i].SeTranslation">
                 </div>
 
                 <div class="col-md-12" style="padding:3px; margin:3px;">
@@ -36,17 +36,25 @@
 
             // SCRIPTS SECTION START
             <script>
-        var seeTranslationButton = document.getElementById("@("see-translation-btn" + i)");
-        seeTranslationButton.addEventListener("click", translateToSe);
+                var seeTranslationButton = document.getElementById("@("see-translation-btn" + i)");
+                var seeTranslationButtons = document.getElementsByClassName("btn-primary");
 
+        seeTranslationButtons[@i].addEventListener("click",
             function translateToSe() {
-                seeTranslationButton.innerHTML = "@Model.WordsToInclude[i].SeTranslation";
-        }
-                var answerInput = document.getElementById("answer" + @i);
-        var correctAnswer = "@Model.WordsToInclude[i].SeTranslation";
+                if (seeTranslationButtons[@i].innerHTML != "See right answer") {
+                    seeTranslationButtons[@i].innerHTML = "See right answer";
+                }
+                else {
+                    seeTranslationButtons[@i].innerHTML = "@Model.WordsToInclude[i].SeTranslation";
+                }
+                seeTranslationButtons[@i].classList.toggle("see-answer-clicked");
+            },
+            false);
 
-        console.log("answerInput in View: " + answerInput);
-        console.log("correctAnswer: " + correctAnswer);
+
+                var answerInput = document.getElementById("answer" + @i); /*problem here*/
+
+                console.log("answerInput in View: " + answerInput);
 
             </script>
             // END OF SCRIPTS SECTION

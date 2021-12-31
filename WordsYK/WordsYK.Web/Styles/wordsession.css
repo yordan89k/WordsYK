@@ -9,6 +9,18 @@
     box-shadow: rgb(220 230 240 / 30%) 0px 1px 2px 0px, rgb(155 165 165 / 15%) 0px 1px 3px 1px;
 }
 
+.answer-box {
+    display: inline-block;
+    border: solid thin grey;
+    padding: 3px;
+    margin: 3px;
+}
+
+.see-answer-clicked {
+    background-color: #D0FFC5 !important;
+    color: black !important;
+}
+
 .translate-input {
     padding: 0.3rem;
 }
@@ -21,5 +33,9 @@
 }
 
 .valid {
-    background-color: #D0FFC5;
+    background-color: #D0FFC5; 
+}
+
+.hidden {
+    display: none;
 }
