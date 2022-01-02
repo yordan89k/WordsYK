@@ -8,37 +8,46 @@
 @if (Model.WordsToInclude != null && Model.WordsToInclude.Any() && Model.NumberOfWords > 0)
 {
 
-    <div class="col-md-12 session-page">
-        <div>
-            <p id="result">Result</p>
-        </div>
+<div class="col-sm-12 session-page">
+    <div class="col-sm-12 result-info" id="result-info">
+        Result: <span id="result-progress">0</span> / @Model.NumberOfWords correct words
+    </div>
+    <div class="col-sm-12 load-more-box hidden" id="load-more-box">
+        <button id="load-more-btn" class="load-more-btn" onclick="window.location.reload();"> -- Load new session -- </button>
+    </div>
 
-        @for (int i = 0; i < Model.NumberOfWords; i++)
-        {
-            <div class="col-md-3 word-box">
-                <div class="col-md-12 text-uppercase text-primary">
-                    @Html.DisplayFor(model => model.WordsToInclude[i].EnTranslation)
-                </div>
-
-                <div class="col-md-12 translate-input">
-                    <label for="@("answer" + i)">Translate to Swedish: </label>
-                    <input id="@("answer" + i)" data-answer="@Model.WordsToInclude[i].SeTranslation">
-                </div>
-
-                <div class="col-md-12" style="padding:3px; margin:3px;">
-                    <img class="img-thumbnail" style="height:200px" src="~/Content/WordImages/@Model.WordsToInclude[i].Image">
-                </div>
-
-                <div class="col-md-12" style="padding:3px; margin:3px;">
-                    <button id="@("see-translation-btn" + i)" class="btn-primary">See right answer</button>
-                </div>
+    @for (int i = 0; i < Model.NumberOfWords; i++)
+    {
+        <div class="col-sm-3 word-box">
+            <div class="col-md-12 text-uppercase text-primary">
+                @Html.DisplayFor(model => model.WordsToInclude[i].EnTranslation)
             </div>
 
-            // SCRIPTS SECTION START
-            <script>
-                var seeTranslationButton = document.getElementById("@("see-translation-btn" + i)");
-                var seeTranslationButtons = document.getElementsByClassName("btn-primary");
+            <div class="col-md-12 translate-input">
+                <label for="@("answer" + i)">Translate to Swedish: </label>
+                <input id="@("answer" + i)" data-answer="@Model.WordsToInclude[i].SeTranslation">
+            </div>
 
+            <div class="col-md-12 image-box">
+                <img class="img-thumbnail word-image" src="~/Content/WordImages/@Model.WordsToInclude[i].Image">
+            </div>
+
+            <div class="col-md-12" style="padding:3px; margin:3px;">
+                <button id="@("see-translation-btn" + i)" class="btn-primary" tabindex="-1">See right answer</button>
+            </div>
+        </div>
+
+        // SCRIPTS SECTION START
+        <script>
+            // Global Variables
+            var seeTranslationButton = document.getElementById("@("see-translation-btn" + i)");
+            var seeTranslationButtons = document.getElementsByClassName("btn-primary");
+            var numberOfWords = @Model.NumberOfWords;
+            var loadMoreBtn = document.getElementById("load-more-btn");
+            var loadMoreBox = document.getElementById("load-more-box");
+            var resultInfo = document.getElementById("result-info");
+
+            // Translation Buttons
         seeTranslationButtons[@i].addEventListener("click",
             function translateToSe() {
                 if (seeTranslationButtons[@i].innerHTML != "See right answer") {
@@ -51,16 +60,12 @@
             },
             false);
 
+                var answerInput = document.getElementById("answer" + @i);
+        </script>
+        // END OF SCRIPTS SECTION
 
-                var answerInput = document.getElementById("answer" + @i); /*problem here*/
-
-                console.log("answerInput in View: " + answerInput);
-
-            </script>
-            // END OF SCRIPTS SECTION
-
-        }
-    </div>
+    }
+</div>
     <div class="col-md-12 clearfix" />
 
 }

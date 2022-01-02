@@ -1,10 +1,16 @@
-﻿.session-page {
+﻿
+/* Genral */
+.session-page {
 }
 
-/*TODO: file is loaded but the word-box class is not applied */
+.hidden {
+    display: none;
+}
+
+/* Words */
 .word-box {
     padding: 2rem;
-    margin: 10rem;
+    margin: 2rem;
     border: solid thin grey;
     box-shadow: rgb(220 230 240 / 30%) 0px 1px 2px 0px, rgb(155 165 165 / 15%) 0px 1px 3px 1px;
 }
@@ -36,6 +42,34 @@
     background-color: #D0FFC5; 
 }
 
-.hidden {
-    display: none;
+.image-box {
+    padding: 3px;
+    margin: 3px;
+}
+
+.word-image {
+    height: 200px;
+}
+
+/* Result */
+.result-info {
+    text-align: center;
+    font-size: large;
+    margin: 1rem;
+}
+
+.load-more-btn {
+    background-color: seagreen;
+    text-align: center;
+    font-size: large;
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.load-more-box {
+    display: grid;
+}
+
+.greenText {
+    color: #D0FFC5;
 }

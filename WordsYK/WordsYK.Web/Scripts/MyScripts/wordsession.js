@@ -12,6 +12,7 @@ CustomValidation.prototype = {
         return this.invalidities.join('. \n');
     },
     checkValidity: function (input) {
+
         for (var i = 0; i < this.validityChecks.length; i++) {
 
             var isInvalid = this.validityChecks[i].isInvalid(input);
@@ -24,12 +25,15 @@ CustomValidation.prototype = {
                 if (isInvalid) {
                     input.classList.add('invalid');
                     input.classList.remove('valid');
+
                 } else {
                     input.classList.remove('invalid');
                     input.classList.add('valid');
+
                 }
 
-            } // end if requirementElement
+            }
+            updateResult();
         } // end for
     }
 };
@@ -46,7 +50,6 @@ var answerValidityChecks = [
 
 function checkInput(input) {
 
-    console.log("checking input... : " + input.id)
     input.CustomValidation.invalidities = [];
     input.CustomValidation.checkValidity(input);
 
@@ -56,18 +59,11 @@ function checkInput(input) {
     } else {
         var message = input.CustomValidation.getInvalidities();
         console.log("Invalid as fuck")
-        console.log("message: " + message)
         input.setCustomValidity(message);
     }
 }
 
-//console.log("answerInput.id in file: " + answerInput.id);
-//answerInput.CustomValidation = new CustomValidation();
-//answerInput.CustomValidation.validityChecks = answerValidityChecks;
-
 var inputs = document.querySelectorAll('input:not([type="submit"])');
-console.log("inputs[0].id: " + inputs[0].id);
-console.log("inputs[1].id: " + inputs[1].id);
 
 for (var i = 0; i < inputs.length; i++) {
     inputs[i].addEventListener('keyup', function () {
@@ -76,3 +72,18 @@ for (var i = 0; i < inputs.length; i++) {
         checkInput(this);
     });
 }
+
+function updateResult() {
+
+    var correctWordsNumber = document.getElementsByClassName("valid").length;
+    document.getElementById("result-progress").innerHTML = correctWordsNumber;
+
+    if (correctWordsNumber == numberOfWords) {
+        loadMoreBox.classList.remove('hidden')
+        resultInfo.classList.add('greenText')
+        loadMoreBtn.focus();
+    } else {
+        loadMoreBox.classList.add('hidden')
+        resultInfo.classList.remove('greenText')
+    }
+};
